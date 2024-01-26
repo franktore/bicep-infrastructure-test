@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters":
     {
-        "acrSku": { "value": "Basic" },
-        "acrName": { "value": "s039iocsharedbrdev" },
-        "env": { "value": "dev" },
-        "tagEnvironment": { "value": "Dev" },
+        "acrSku": { "value": "Standard" },
+        "acrName": { "value": "s039iocsharedbrprod" },
+        "env": { "value": "prod" },
+        "tagEnvironment": { "value": "Prod" },
         "appConfigSku": { "value": "Standard" }
     }
 }
