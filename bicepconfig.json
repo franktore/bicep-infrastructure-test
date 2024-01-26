@@ -2,10 +2,10 @@
     "moduleAliases": {
       "br": {
         "IocRegistry": {
-          "registry": "s039iocportalbrdev.azurecr.io"
+          "registry": "s039iocsharedbrdev.azurecr.io"
         },
         "CoreModules": {
-          "registry": "s039iocportalbrdev.azurecr.io",
+          "registry": "s039iocsharedbrdev.azurecr.io",
           "modulePath": "bicep/modules"
         }
       }
