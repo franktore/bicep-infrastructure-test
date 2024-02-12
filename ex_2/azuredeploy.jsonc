@@ -1,0 +1,161 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string"
+    },
+    "location": {
+      "defaultValue": "[resourceGroup().location]",
+      "type": "string"
+    },
+    "tags": {
+      "type": "object"
+    },
+    "appserviceResourceId": {
+      "type": "string"
+    },
+    "containerRegistryName": {
+      "type": "string"
+    },
+    "containerImageName": {
+      "type": "string",
+      "defaultValue": "[parameters('webAppName')]"
+    },
+    "containerImageTag": {
+      "type": "string"
+    },
+    "environmentVariables": {
+      "type": "array"
+    },
+    "appGatewayIp": {
+      "type": "string"
+    },
+    "appCommandLine": {
+      "defaultValue": "",
+      "type": "string"
+    },
+    "allowedCorsOrigins": {
+      "type": "array",
+      "defaultValue": "[json(' [ ] ')]"
+    },
+    "supportCredentials": {
+      "type": "bool",
+      "defaultValue": false
+    },
+    "acrResourceGroup": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]"
+    },
+    "azureStorageAccounts": {
+      "type": "object",
+      "defaultValue": {}
+    }
+  },
+  "functions": [
+    {
+      "namespace": "equinor",
+      "members": {
+        "createSettingsObject": {
+          "parameters": [
+            {
+              "name": "key",
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "type": "string"
+            }
+          ],
+          "output": {
+            "type": "array",
+            "value": [
+              {
+                "name": "[parameters('key')]",
+                "value": "[parameters('value')]"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "variables": {
+    "globalAppSettings": [
+
+      {
+        "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+        "value": "false"
+      },
+      {
+        "name": "DOCKER_ENABLE_CI",
+        "value": "true"
+      }
+    ]
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2020-12-01",
+      "name": "[parameters('webAppName')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "enabled": true,
+        "serverFarmId": "[parameters('appserviceResourceId')]",
+        "clientAffinityEnabled": false,
+        "siteConfig": {
+          "linuxFxVersion": "[concat('DOCKER|', parameters('containerRegistryName'), '.azurecr.io/', toLower(parameters('containerImageName')), ':', parameters('containerImageTag'))]",
+          "appSettings": "[union(variables('globalAppSettings'), parameters('environmentVariables'), equinor.createSettingsObject('DOCKER_REGISTRY_SERVER_URL', reference(resourceId(parameters('acrResourceGroup'), 'Microsoft.ContainerRegistry/registries/', parameters('containerRegistryName')), '2019-05-01').loginServer), equinor.createSettingsObject('DOCKER_REGISTRY_SERVER_USERNAME', listCredentials(resourceId(parameters('acrResourceGroup'), 'Microsoft.ContainerRegistry/registries/', parameters('containerRegistryName')), '2019-05-01').username), equinor.createSettingsObject('DOCKER_REGISTRY_SERVER_PASSWORD', listCredentials(resourceId(parameters('acrResourceGroup'), 'Microsoft.ContainerRegistry/registries/', parameters('containerRegistryName')), '2019-05-01').passwords[0].value))]",
+          "appCommandLine": "[parameters('appCommandLine')]"
+        },
+        "httpsOnly": true
+      },
+      "resources": [
+        {
+          "type": "config",
+          "apiVersion": "2020-06-01",
+          "name": "web",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites/', parameters('webAppName'))]"
+          ],
+          "tags": "[parameters('tags')]",
+          "properties": {
+            "numberOfWorkers": 1,
+            "alwaysOn": true,
+            "cors": {
+              "allowedOrigins": "[parameters('allowedCorsOrigins')]",
+              "supportCredentials": "[parameters('supportCredentials')]"
+            },
+            "http20Enabled": false,
+            "minTlsVersion": "1.2",
+            "ftpsState": "Disabled",
+            "ipSecurityRestrictions": [
+              {
+                "ipAddress": "[parameters('appGatewayIp')]",
+                "action": "Allow",
+                "priority": "100",
+                "name": "Allow IOC Application Gateway"
+              }
+            ],
+            "azureStorageAccounts": "[parameters('azureStorageAccounts')]"
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "objectId": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+    },
+    "identityObjectId": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Web/sites', parameters('webAppName')),'2019-08-01', 'full').identity.principalId]"
+    }
+  }
+}
