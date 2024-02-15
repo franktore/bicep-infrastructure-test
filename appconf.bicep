@@ -36,7 +36,7 @@ var featureFlags = [
   }
 ]
 
-module appConfigModule 'br/CoreModules:appconfiguration:v1.3' = {
+module appConfigModule 'br/CoreModulesDEV:appconfig:0.1' = {
   name: 'appConfigDeploy'
   scope: resourceGroup()
   params: {

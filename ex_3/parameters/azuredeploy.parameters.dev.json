@@ -8,6 +8,6 @@
         "appConfigSku": {"value": "Standard"},
         "tagEnvironment": {"value": "Dev"},
         "registryName": { "value": "s039iocsharedbreg" },
-        "appConfigName": { "value": "s039-ioc-shared-appconfig-" }
+        "appConfigName": { "value": "s039-ioc-shared-appconf-" }
     }
 }

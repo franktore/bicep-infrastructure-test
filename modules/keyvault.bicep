@@ -9,7 +9,7 @@ param softDeleteRetentionInDays int = 90
 
 var rgScope = resourceGroup()
 
-resource keyvaultResource 'Microsoft.KeyVault/vaults@2023-03-01' = {
+resource keyvaultResource 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: 'string'
   location: rgScope.location
   tags: tags
