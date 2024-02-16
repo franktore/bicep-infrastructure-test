@@ -73,7 +73,7 @@ application insights key to the app.
                 }
             },
             "appserviceResourceId": {
-                "value": "[resourceId('Microsoft.Web/serverfarms',concat('s039-ioc-almond-plan-',parameters('environment')))]"
+                "value": "[resourceId('Microsoft.Web/serverfarms',concat('S494-ioc-almond-plan-',parameters('environment')))]"
             },
             "containerRegistryName": {
                 "value": "[variables('registryName')]"
@@ -85,7 +85,7 @@ application insights key to the app.
                 "value": "[parameters('containerImageTag')]"
             },
             "acrResourceGroup": {
-                "value": "S039-ioc-almond-rg-dev"
+                "value": "S494-ioc-almond-rg-dev"
             },
             "appCommandLine": {
                 "value": "./entry_point.sh"
@@ -94,7 +94,7 @@ application insights key to the app.
                 "value": [
                     "http://localhost:5001",
                     "[variables('portalUrl')",
-                    "[concat('https://s039-ioc-almondfe-app-', parameters('environment'), '.azurewebsites.net')]"
+                    "[concat('https://S494-ioc-almondfe-app-', parameters('environment'), '.azurewebsites.net')]"
                 ]
             },
             "environmentVariables": {

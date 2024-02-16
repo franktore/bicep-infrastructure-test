@@ -23,7 +23,7 @@ param appConfigSku string = 'Standard'
 var acrName = '${registryName}${env}'
 var appConfigFullName = '${appConfigName}${env}'
 
-module bcrModule 'br:s039iocsharedbregdev.azurecr.io/bicep/modules/containerregistry:0.1' = {
+module bcrModule 'br:S494iocsharedbregdev.azurecr.io/bicep/modules/containerregistry:0.1' = {
   name: 'bicepRegistryDeploy'
   scope: resourceGroup()
   params: {
@@ -38,7 +38,7 @@ module bcrModule 'br:s039iocsharedbregdev.azurecr.io/bicep/modules/containerregi
   }
 }
 
-module appConfModule 'br:s039iocsharedbregdev.azurecr.io/bicep/modules/appconfig:0.1' = {
+module appConfModule 'br:S494iocsharedbregdev.azurecr.io/bicep/modules/appconfig:0.1' = {
   name: 'appConfDeploy'
   scope: resourceGroup()
   params: {

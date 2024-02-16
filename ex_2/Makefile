@@ -1,5 +1,5 @@
-SUBSCRIPTION        := 24d1df90-df6d-4d34-9f8d-e4bbb9c5e9e4
-RESOURCE_GROUP_DEV  := s039-ioc-shared-rg-dev
+SUBSCRIPTION        := 1d859091-2b3a-43df-b2be-f73c460fcc44
+RESOURCE_GROUP_DEV  := S494-ioc-shared-rg-dev
 
 RUNID := $(shell date +%F.%H-%M-%S)
 

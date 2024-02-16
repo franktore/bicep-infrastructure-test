@@ -5,17 +5,17 @@
   "moduleAliases": {
     "br": {
       "IocRegistryDEV": {
-        "registry": "s039iocsharedbregdev.azurecr.io"
+        "registry": "S494iocsharedbregdev.azurecr.io"
       },
       "CoreModulesDEV": {
-        "registry": "s039iocsharedbregdev.azurecr.io",
+        "registry": "S494iocsharedbregdev.azurecr.io",
         "modulePath": "bicep/modules"
       },
       "IocRegistryPROD": {
-          "registry": "s039iocsharedbregprod.azurecr.io"
+          "registry": "S494iocsharedbregprod.azurecr.io"
         },
         "CoreModulesPROD": {
-          "registry": "s039iocsharedbregprod.azurecr.io",
+          "registry": "S494iocsharedbregprod.azurecr.io",
           "modulePath": "bicep/modules"
         }
     }

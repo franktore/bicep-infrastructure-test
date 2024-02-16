@@ -24,7 +24,7 @@ Now that we can convert ARM to Bicep and publish modules to registry we will sta
 To call a module from the registry we change our deployment file (i.e. `main.bicep`) like so:
 
 ```
-module bcrModule '../modules/containerregistry.bicep' --> module bcrModule 'br:s039iocsharedbregdev.azurecr.io/bicep/modules/containerregistry:<version>'
+module bcrModule '../modules/containerregistry.bicep' --> module bcrModule 'br:S494iocsharedbregdev.azurecr.io/bicep/modules/containerregistry:<version>'
 ```
 
 you may have to run the restore command to update your local module-cache, but this normally should not be required
@@ -48,17 +48,17 @@ ex. `bicepconfig.json`
   "moduleAliases": {
     "br": {
       "IocRegistryDEV": {
-        "registry": "s039iocsharedbregdev.azurecr.io"
+        "registry": "S494iocsharedbregdev.azurecr.io"
       },
       "CoreModulesDEV": {
-        "registry": "s039iocsharedbregdev.azurecr.io",
+        "registry": "S494iocsharedbregdev.azurecr.io",
         "modulePath": "bicep/modules"
       },
       "IocRegistryPROD": {
-          "registry": "s039iocsharedbregprod.azurecr.io"
+          "registry": "S494iocsharedbregprod.azurecr.io"
         },
         "CoreModulesPROD": {
-          "registry": "s039iocsharedbregprod.azurecr.io",
+          "registry": "S494iocsharedbregprod.azurecr.io",
           "modulePath": "bicep/modules"
         }
     }
@@ -67,11 +67,11 @@ ex. `bicepconfig.json`
 ```
 
 
-The `CoreModulesPROD` specified in the `bicepconfig.json` links to `s039iocsharedbregprod.azurecr.io/bicep/modules`. The acronym `br` simply stands for `Bicep Registry`. For development or testing one may use `CoreModulesDEV` which links to an equivalent registry found here `s039iocsharedbregdev.azurecr.io/bicep/modules`.
+The `CoreModulesPROD` specified in the `bicepconfig.json` links to `S494iocsharedbregprod.azurecr.io/bicep/modules`. The acronym `br` simply stands for `Bicep Registry`. For development or testing one may use `CoreModulesDEV` which links to an equivalent registry found here `S494iocsharedbregdev.azurecr.io/bicep/modules`.
 
 Our deployment file can now be changed to
 ```
-module bcrModule 'br:s039iocsharedbregdev.azurecr.io/bicep/modules/containerregistry:<version>' --> module bcrModule 'br/CoreModulesDEV:containerregistry:<version>'
+module bcrModule 'br:S494iocsharedbregdev.azurecr.io/bicep/modules/containerregistry:<version>' --> module bcrModule 'br/CoreModulesDEV:containerregistry:<version>'
 ```
 
 run make `deploy.final` to test that it works.

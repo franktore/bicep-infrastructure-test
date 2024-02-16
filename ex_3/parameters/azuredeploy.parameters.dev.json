@@ -7,7 +7,7 @@
         "acrSku": {"value": "Basic"},
         "appConfigSku": {"value": "Standard"},
         "tagEnvironment": {"value": "Dev"},
-        "registryName": { "value": "s039iocsharedbreg" },
-        "appConfigName": { "value": "s039-ioc-shared-appconf-" }
+        "registryName": { "value": "S494iocsharedbreg" },
+        "appConfigName": { "value": "S494-ioc-shared-appconf-" }
     }
 }

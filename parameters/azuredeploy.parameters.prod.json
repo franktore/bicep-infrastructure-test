@@ -4,7 +4,7 @@
     "parameters":
     {
         "acrSku": { "value": "Standard" },
-        "acrName": { "value": "s039iocsharedbrprod" },
+        "acrName": { "value": "S494iocsharedbrprod" },
         "env": { "value": "prod" },
         "tagEnvironment": { "value": "Prod" },
         "appConfigSku": { "value": "Standard" }

@@ -5,6 +5,6 @@
     {
         "env": {"value": "dev"},
         "sku": {"value": "Basic"},
-        "registryName": { "value": "s039iocsharedbregdev" }
+        "registryName": { "value": "S494iocsharedbregdev" }
     }
 }

@@ -3,8 +3,8 @@ param tagComponent string
 param tagEnvironment string
 param appConfigSku string
 
-var keyVaultName = 's039-ioc-portal-kv-${env}'
-var appConfigName = 's039-ioc-portal-appconf-${env}'
+var keyVaultName = 'S494-ioc-portal-kv-${env}'
+var appConfigName = 'S494-ioc-portal-appconf-${env}'
 var vaultDnsSuffix = environment().suffixes.keyvaultDns
 
 var keyValuePairs = [
